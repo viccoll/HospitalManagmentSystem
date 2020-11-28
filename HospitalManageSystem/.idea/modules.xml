@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../HospitalManageServer/HospitalManageServer.iml" filepath="$PROJECT_DIR$/../HospitalManageServer/HospitalManageServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/HospitalManageSystem.iml" filepath="$PROJECT_DIR$/HospitalManageSystem.iml" />
     </modules>
   </component>
