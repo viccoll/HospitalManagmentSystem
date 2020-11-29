@@ -9,7 +9,7 @@ public class Controller {
 
     @FXML
     public void initialize(){
-        client = new ClientHandler("127.0.0.1", "9006");
+        client = new ClientHandler("127.0.0.1", "3000");
     }
 
 
