@@ -3,7 +3,7 @@ package Controllers;
 import ServerHandlers.ClientHandler;
 import javafx.fxml.FXML;
 
-public class Controller {
+public class AuthorizationController {
 
     private ClientHandler client;
 
