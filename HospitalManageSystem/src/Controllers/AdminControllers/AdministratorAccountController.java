@@ -9,10 +9,7 @@ import javafx.scene.control.Label;
 public class AdministratorAccountController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    private Button returnBackButton;
 
     @FXML
     private Button desktopAdministratorButton;

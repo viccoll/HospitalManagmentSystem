@@ -26,7 +26,7 @@ public class AuthorizationController {
     @FXML
 
     public void initialize(){
-        client = new ClientHandler("127.0.0.1", "3000");
+
     }
 
 }

@@ -13,134 +13,104 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controllers.RegControllers.IssueOutpatientCardController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegControllers.IssueOutpatientCardController">
    <AnchorPane prefHeight="101.0" prefWidth="900.0" style="-fx-background-color: white;">
-      <ImageView fitHeight="55.0" fitWidth="63.0" layoutX="54.0" layoutY="23.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@../../resources/logo.png"/>
+      <ImageView fitHeight="55.0" fitWidth="63.0" layoutX="54.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../resources/logo.png" />
       </ImageView>
-      <Label fx:id="fullnameRegLabel" layoutX="598.0" layoutY="23.0" prefHeight="38.0" prefWidth="287.0"
-             text="Габриельчик Виктория Сергеевна" textAlignment="CENTER" textFill="#bbbbbb">
+      <Label fx:id="fullnameRegLabel" layoutX="598.0" layoutY="23.0" prefHeight="38.0" prefWidth="287.0" text="Габриельчик Виктория Сергеевна" textAlignment="CENTER" textFill="#bbbbbb">
          <font>
-            <Font name="Symbol" size="17.0"/>
+            <Font name="Symbol" size="17.0" />
          </font>
       </Label>
       <Label layoutX="118.0" layoutY="32.0" prefHeight="18.0" prefWidth="74.0" text="Vikera" textFill="#bbbbbb">
          <font>
-            <Font name="Serif Regular" size="24.0"/>
+            <Font name="Serif Regular" size="24.0" />
          </font>
       </Label>
    </AnchorPane>
-   <Button fx:id="desktopRegButton" focusTraversable="false" layoutY="102.0" mnemonicParsing="false" prefHeight="92.5"
-           prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Рабочий стол"
-           textFill="#000000a6">
+   <Button fx:id="desktopRegButton" focusTraversable="false" layoutY="102.0" mnemonicParsing="false" prefHeight="92.5" prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Рабочий стол" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="14.0"/>
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
       <cursor>
-         <Cursor fx:constant="MOVE"/>
+         <Cursor fx:constant="MOVE" />
       </cursor>
    </Button>
-   <Button fx:id="issueAppointmentCardButton" layoutY="196.0" mnemonicParsing="false" prefHeight="91.0"
-           prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Оформить талон"
-           textFill="#000000a6">
+   <Button fx:id="issueAppointmentCardButton" layoutY="196.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Оформить талон" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="14.0"/>
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="giveAppointmentCardButton" layoutY="288.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0"
-           style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Выдать талон" textFill="#000000a6">
+   <Button fx:id="giveAppointmentCardButton" layoutY="288.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Выдать талон" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="14.0"/>
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="issueOutpatientCardButton" layoutY="379.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0"
-           style="-fx-background-color: #16b9c3ab; -fx-background-radius: 0;" text="Оформить амбулаторную карту"
-           textAlignment="CENTER" textFill="#000000a6" wrapText="true">
+   <Button fx:id="issueOutpatientCardButton" layoutY="379.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0" style="-fx-background-color: #16b9c3ab; -fx-background-radius: 0;" text="Оформить амбулаторную карту" textAlignment="CENTER" textFill="#000000a6" wrapText="true">
       <font>
-         <Font name="Segoe UI Semilight" size="14.0"/>
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="getDoctorScheduleButton" layoutY="470.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0"
-           style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Расписание врачей"
-           textFill="#000000a6">
+   <Button fx:id="getDoctorScheduleButton" layoutY="470.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Расписание врачей" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="14.0"/>
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="editReqProfileButton" layoutY="561.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0"
-           style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Настроить профиль"
-           textFill="#000000a6">
+   <Button fx:id="editReqProfileButton" layoutY="561.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="194.0" style="-fx-background-color: #00c0e14d; -fx-background-radius: 0;" text="Настроить профиль" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="14.0"/>
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
    <AnchorPane layoutY="652.0" prefHeight="48.0" prefWidth="900.0" style="-fx-background-color: #00c0e14d;">
-      <ImageView fitHeight="38.0" fitWidth="52.0" layoutX="19.0" layoutY="6.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@../../resources/cancel.png"/>
+      <ImageView fitHeight="38.0" fitWidth="52.0" layoutX="19.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../resources/cancel.png" />
       </ImageView>
-      <Button fx:id="returnBackButton" layoutX="57.0" layoutY="12.0" mnemonicParsing="false"
-              style="-fx-background-image: returnBackImage;" text="Button"/>
+      <Button fx:id="returnBackButton" layoutX="57.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-image: returnBackImage;" text="Button" />
    </AnchorPane>
-   <TextField fx:id="surnamePatientTextField" layoutX="218.0" layoutY="156.0" promptText=" Фамилия"
-              text="phoneTextField"/>
-   <TextField fx:id="namePatientTextField" layoutX="387.0" layoutY="155.0" promptText="Имя "/>
-   <TextField fx:id="patronymicPatientTextField" layoutX="551.0" layoutY="156.0" prefHeight="26.0" prefWidth="150.0"
-              promptText="Отчество "/>
-   <Button fx:id="confirmOutPatientCardButton" layoutX="213.0" layoutY="547.0" mnemonicParsing="false" prefHeight="38.0"
-           prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Оформить"
-           textFill="#000000a6">
+   <TextField fx:id="surnamePatientTextField" layoutX="218.0" layoutY="156.0" promptText=" Фамилия" />
+   <TextField fx:id="namePatientTextField" layoutX="387.0" layoutY="155.0" promptText="Имя " />
+   <TextField fx:id="patronymicPatientTextField" layoutX="551.0" layoutY="156.0" prefHeight="26.0" prefWidth="150.0" promptText="Отчество " />
+   <Button fx:id="confirmOutPatientCardButton" layoutX="213.0" layoutY="547.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Оформить" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="13.0"/>
+         <Font name="Segoe UI Semilight" size="13.0" />
       </font>
    </Button>
-   <Button fx:id="clearButton" layoutX="374.0" layoutY="547.0" mnemonicParsing="false" prefHeight="38.0"
-           prefWidth="138.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Очистить"
-           textFill="#000000a6">
+   <Button fx:id="clearButton" layoutX="374.0" layoutY="547.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="138.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Очистить" textFill="#000000a6">
       <font>
-         <Font name="Segoe UI Semilight" size="13.0"/>
+         <Font name="Segoe UI Semilight" size="13.0" />
       </font>
    </Button>
-   <ImageView fitHeight="176.0" fitWidth="194.0" layoutX="681.0" layoutY="482.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../../resources/Letter.png"/>
+   <ImageView fitHeight="176.0" fitWidth="194.0" layoutX="681.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../resources/Letter.png" />
    </ImageView>
-   <TextField fx:id="phoneTextField" layoutX="214.0" layoutY="476.0" promptText="Номер телефона "/>
-   <ComboBox fx:id="streetComboBox" layoutX="213.0" layoutY="317.0" prefWidth="150.0" promptText="Улица проживания"
-             style="-fx-background-color: #bbbbbb;"/>
-   <TextField fx:id="houseNumberTextField" layoutX="383.0" layoutY="317.0" promptText="Номер дома"/>
-   <TextField fx:id="flatNumberTextField" layoutX="547.0" layoutY="317.0" promptText="Номер квартиры"/>
-   <TextField fx:id="corpusNumberTextField" layoutX="709.0" layoutY="317.0" promptText="Корпус"/>
-   <TextField fx:id="passportSeriesTextField" layoutX="214.0" layoutY="424.0" promptText="Серия паспорта"/>
-   <TextField fx:id="passportNumberTextField" layoutX="387.0" layoutY="424.0" promptText="Номер паспорта"/>
-   <DatePicker fx:id="birthdayDatePicker" layoutX="551.0" layoutY="203.0" prefHeight="26.0" prefWidth="150.0"
-               promptText="Дата рождения"/>
-   <RadioButton fx:id="manRadio" layoutX="217.0" layoutY="207.0" mnemonicParsing="false" text="Мужской">
+   <TextField fx:id="phoneTextField" layoutX="214.0" layoutY="476.0" promptText="Номер телефона " />
+   <ComboBox fx:id="streetComboBox" layoutX="213.0" layoutY="317.0" prefWidth="150.0" promptText="Улица проживания" style="-fx-background-color: #bbbbbb;" />
+   <TextField fx:id="houseNumberTextField" layoutX="383.0" layoutY="317.0" promptText="Номер дома" />
+   <TextField fx:id="flatNumberTextField" layoutX="547.0" layoutY="317.0" promptText="Номер квартиры" />
+   <TextField fx:id="corpusNumberTextField" layoutX="709.0" layoutY="317.0" promptText="Корпус" />
+   <TextField fx:id="passportSeriesTextField" layoutX="214.0" layoutY="424.0" promptText="Серия паспорта" />
+   <TextField fx:id="passportNumberTextField" layoutX="387.0" layoutY="424.0" promptText="Номер паспорта" />
+   <DatePicker fx:id="birthdayDatePicker" layoutX="551.0" layoutY="203.0" prefHeight="26.0" prefWidth="150.0" promptText="Дата рождения" />
+   <RadioButton fx:id="manRadio" layoutX="217.0" layoutY="207.0" mnemonicParsing="false" selected="true" text="Мужской">
       <toggleGroup>
-         <ToggleGroup fx:id="gender"/>
+         <ToggleGroup fx:id="genderGroup" />
       </toggleGroup>
    </RadioButton>
-   <RadioButton fx:id="womanRadio" layoutX="311.0" layoutY="207.0" mnemonicParsing="false"
-                style="-fx-background-color: white;" text="Женский" toggleGroup="$gender"/>
-   <Label layoutX="217.0" layoutY="109.0" prefHeight="28.0" prefWidth="322.0" text="Данные пациента"
-          textFill="#000000d9">
+   <RadioButton fx:id="womanRadio" layoutX="311.0" layoutY="207.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Женский" toggleGroup="$genderGroup" />
+   <Label layoutX="217.0" layoutY="109.0" prefHeight="28.0" prefWidth="322.0" text="Данные пациента" textFill="#000000d9">
       <font>
-         <Font name="Segoe UI Semilight" size="15.0"/>
+         <Font name="Segoe UI Semilight" size="15.0" />
       </font>
    </Label>
-   <Label layoutX="213.0" layoutY="271.0" prefHeight="28.0" prefWidth="322.0" text="Данные о проживании"
-          textFill="#000000d9">
+   <Label layoutX="213.0" layoutY="271.0" prefHeight="28.0" prefWidth="322.0" text="Данные о проживании" textFill="#000000d9">
       <font>
-         <Font name="Segoe UI Semilight" size="15.0"/>
+         <Font name="Segoe UI Semilight" size="15.0" />
       </font>
    </Label>
-   <Label layoutX="217.0" layoutY="379.0" prefHeight="28.0" prefWidth="322.0" text="Паспортные данные"
-          textFill="#000000d9">
+   <Label layoutX="217.0" layoutY="379.0" prefHeight="28.0" prefWidth="322.0" text="Паспортные данные" textFill="#000000d9">
       <font>
-         <Font name="Segoe UI Semilight" size="15.0"/>
+         <Font name="Segoe UI Semilight" size="15.0" />
       </font>
    </Label>
 </AnchorPane>
