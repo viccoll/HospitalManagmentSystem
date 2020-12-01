@@ -15,13 +15,6 @@ public class AuthorizationController {
     private ClientHandler client;
 
     @FXML
-
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private PasswordField passwordField;
 
     @FXML
