@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ServerHandler implements Runnable {
+
     protected Socket clientSocket = null;
     ObjectInputStream request; //Принятие
     ObjectOutputStream respond; //Отправка
@@ -23,23 +24,25 @@ public class ServerHandler implements Runnable {
         try {
             request = new ObjectInputStream(clientSocket.getInputStream());
             respond = new ObjectOutputStream(clientSocket.getOutputStream());
-            String action = request.readObject().toString();
-            System.out.println(action);
-            PersonalAccount personalAccount = (PersonalAccount)request.readObject();
-            respond.writeObject(personalAccount.authorize());
-            System.out.println("id"+personalAccount.getId());
-            Employee employee = new Employee();
-            if(employee.findEmployee(personalAccount.getId())){
-                respond.writeObject(employee);
-                System.out.println(employee.toString());
+
+            while (true) {
+
+                PersonalAccount personalAccount = (PersonalAccount) request.readObject();
+                boolean isAuthorize = personalAccount.authorize();
+                respond.writeObject(isAuthorize);
+
+                if (isAuthorize) {
+                    Employee employee = new Employee();
+
+                    boolean isEmployeeFound = employee.findEmployee(personalAccount.getId());
+                    respond.writeObject(isEmployeeFound);
+
+                    if (isEmployeeFound) respond.writeObject(employee);
+                }
             }
-            else System.out.println("Ничего не нашли");
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-
-
-
-
 }

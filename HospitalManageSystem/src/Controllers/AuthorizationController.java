@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -34,36 +35,55 @@ public class AuthorizationController {
 
     public void initialize(){
         authorizationButton.setOnAction(event -> {
+
             PersonalAccount personalAccount = new PersonalAccount();
             personalAccount.setLogin(loginField.getText().trim());
             personalAccount.setPassword(passwordField.getText().trim());
             ClientHandler clientHandler = ClientHandler.getClient();
-            clientHandler.sendMessage("authorization");
+
             clientHandler.sendObject(personalAccount);
+            /*Авторизовался или нет - принимает ответ с сервера*/
+            boolean isAuthorize = (boolean)clientHandler.readObject();
 
-            if((boolean)clientHandler.readObject()) {
-                Employee employee = new Employee((Employee) clientHandler.readObject());
+                if(isAuthorize) {
+                    /*Найден ли пользователь с таким персональным аккаунтом*/
+                    boolean isEmployeeFound = (boolean)clientHandler.readObject();
+                    if(isEmployeeFound){
+                        Employee employee = new Employee((Employee) clientHandler.readObject());
 
-                switch (employee.getId()){
-                    case 1 :{
-                        authorizationButton.getScene().getWindow().hide();
-                        changeScene("../Views/Reg/regAccount.fxml");
+                        switch (employee.getId()){
+                            case 1 :{
+                                authorizationButton.getScene().getWindow().hide();
+                                changeScene("../Views/Reg/regAccount.fxml");
+                                break;
+                            }
+                            case 2:{
+                                authorizationButton.getScene().getWindow().hide();
+                                changeScene("../Views/Admin/administratorAccount.fxml");
+                                break;
+                            }
+                            case 3:{
+                                authorizationButton.getScene().getWindow().hide();
+                                changeScene("../Views/CareWorker/careWorkerAccount.fxml");
+                                break;
+                            }
+                        }
                     }
-                    case 2:{
-                        authorizationButton.getScene().getWindow().hide();
-                        changeScene("../Views/Admin/administratorAccount.fxml");
-                    }
-                    case 3:{
-                        authorizationButton.getScene().getWindow().hide();
-                        changeScene("../Views/CareWorker/careWorkerAccount.fxml");
-                    }                }
+                    else callAlert("Не удалось определить категорию работника");
 
-                System.out.println("Пользовтель успешно авторизовался");
-            }
-            else System.out.println("Пользовтель не авторизовался");
 
+                }
+                else  callAlert("Ошибка авторизации. Проверьте правильность введенных логина и пароля.");
         });
     }
+
+    private void callAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
+        alert.showAndWait();
+    }
+
     private void changeScene(String fxmlPath) {
         Parent root = null;
         try {
