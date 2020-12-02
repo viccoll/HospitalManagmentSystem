@@ -37,7 +37,27 @@ public class ServerHandler implements Runnable {
                     boolean isEmployeeFound = employee.findEmployee(personalAccount.getId());
                     respond.writeObject(isEmployeeFound);
 
-                    if (isEmployeeFound) respond.writeObject(employee);
+                    if (isEmployeeFound)
+                    {
+                        respond.writeObject(employee);
+                        switch (employee.getId()){
+                            case 1 :{
+                                RegServerHandler regServerHandler = new RegServerHandler(request,respond);
+                                switch (request.readObject().toString()){
+                                    case "addOutPatientCard": regServerHandler.addOutPatientCard(); break;
+                                }
+                                break;
+                            }
+                            case 2:{
+                                System.out.println("Админ");
+                                break;
+                            }
+                            case 3:{
+                                System.out.println("МеРаботник");
+                                break;
+                            }
+                        }
+                    }
                 }
             }
 

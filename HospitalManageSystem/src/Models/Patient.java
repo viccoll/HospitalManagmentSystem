@@ -3,6 +3,7 @@ package Models;
 import java.io.Serializable;
 
 public class Patient implements Serializable {
+    private static final long serialVersionUID = 1113799434508676095L;
     private OutPatientCard outPatientCard;
     private int id;
     private String surname;
@@ -29,6 +30,38 @@ public class Patient implements Serializable {
     }
 
     public Patient() {
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setPassportSeries(String passportSeries) {
+        this.passportSeries = passportSeries;
+    }
+
+    public void setPassportNumber(int passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     private class OutPatientCard{

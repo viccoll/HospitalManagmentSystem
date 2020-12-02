@@ -3,6 +3,9 @@ package Models;
 import java.io.Serializable;
 
 public class Patient implements Serializable {
+
+    private static final long serialVersionUID = 1113799434508676095L;
+
     private OutPatientCard outPatientCard;
     private int id;
     private String surname;
@@ -14,44 +17,36 @@ public class Patient implements Serializable {
     private int passportNumber;
     private String birthday;
 
-    public Patient(String surname, String name, String patronymic,
-                   String phoneNumber, Address address, String passportSeries,
-                   int passportNumber, String birthday) {
-        this.surname = surname;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.passportSeries = passportSeries;
-        this.passportNumber = passportNumber;
-        this.birthday = birthday;
+    public Patient(Patient patient) {
+        this.surname = patient.surname;
+        this.name = patient.name;
+        this.patronymic = patient.patronymic;
+        this.phoneNumber = patient.phoneNumber;
+        this.address =patient.address;
+        this.passportSeries = patient.passportSeries;
+        this.passportNumber = patient.passportNumber;
+        this.birthday = patient.birthday;
         this.outPatientCard = new OutPatientCard(10);
     }
 
     public Patient() {
     }
 
-    private class OutPatientCard{
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
+    }
+
+
+    private class OutPatientCard implements Serializable{
       private int id;
       private int department;
 
         private OutPatientCard(int department) {
-            this.department = department;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public int getDepartment() {
-            return department;
-        }
-
-        public void setDepartment(int department) {
             this.department = department;
         }
     }

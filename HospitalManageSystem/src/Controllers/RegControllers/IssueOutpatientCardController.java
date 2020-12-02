@@ -1,5 +1,6 @@
 package Controllers.RegControllers;
 
+import Models.Address;
 import Models.Patient;
 import ServerHandlers.ClientHandler;
 import javafx.fxml.FXML;
@@ -99,16 +100,22 @@ public class IssueOutpatientCardController {
                 || passportNumber.matches(regexP) || passportNumber.length() !=7
                 || phone.length() !=13 || !phone.matches(regexPhone)){
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Не все поля введены корректно!");
-            alert.showAndWait();
+            callAlert("Не все поля введены корректно!");
         }
         else {
-            ClientHandler clientHandler = ClientHandler.getClient();
-            clientHandler.sendMessage("Patient");
-            clientHandler.sendMessage("addOutPatientCard");
             Patient patient = new Patient();
+            ClientHandler clientHandler = ClientHandler.getClient();
+            clientHandler.sendMessage("addOutPatientCard");
+            patient.setSurname(surnamePatient);
+            patient.setName(namePatient);
+            patient.setPatronymic(patronymicPatient);
+            patient.setBirthday(birthdayDate);
+            patient.setPassportNumber(Integer.parseInt(passportNumber));
+            patient.setPassportSeries(passportSeries);
+            patient.setPhoneNumber(passportNumber);
+            Address address = new Address(street,Integer.parseInt(flatNumber),
+                    Integer.parseInt(houseNumber),Integer.parseInt(corpusNumber));
+            patient.setAddress(address);
             clientHandler.sendObject(patient);
         }
 
@@ -129,5 +136,11 @@ public class IssueOutpatientCardController {
     }
 
     private void updateStreetComboBox() {
+    }
+    private void callAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
+        alert.showAndWait();
     }
 }

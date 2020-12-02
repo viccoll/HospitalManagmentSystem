@@ -32,8 +32,8 @@ public class AuthorizationController {
     private Button authorizationButton;
 
     @FXML
-
     public void initialize(){
+
         authorizationButton.setOnAction(event -> {
 
             PersonalAccount personalAccount = new PersonalAccount();
@@ -70,8 +70,6 @@ public class AuthorizationController {
                         }
                     }
                     else callAlert("Не удалось определить категорию работника");
-
-
                 }
                 else  callAlert("Ошибка авторизации. Проверьте правильность введенных логина и пароля.");
         });
