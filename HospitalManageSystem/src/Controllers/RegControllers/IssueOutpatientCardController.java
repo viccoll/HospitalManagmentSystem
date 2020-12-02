@@ -1,5 +1,6 @@
 package Controllers.RegControllers;
 
+import Models.Patient;
 import ServerHandlers.ClientHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -104,8 +105,11 @@ public class IssueOutpatientCardController {
             alert.showAndWait();
         }
         else {
-            ClientHandler clientHandler=ClientHandler.getClient();
-            clientHandler.sendMessage("dd");
+            ClientHandler clientHandler = ClientHandler.getClient();
+            clientHandler.sendMessage("Patient");
+            clientHandler.sendMessage("addOutPatientCard");
+            Patient patient = new Patient();
+            clientHandler.sendObject(patient);
         }
 
     }

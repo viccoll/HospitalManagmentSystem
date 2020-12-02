@@ -1,7 +1,7 @@
 package Configs;
 
 public class FXMLConfigs {
-    public final static String authorization = "authorization.fxml";
+    public final static String authorization = "Views/authorization.fxml";
 
     public final static String regAccount = "../../Views/Reg/regAccount.fxml";
     public final static String regIssueOutpatientCard = "../../Views/Reg/issueOutpatientCard.fxml";
