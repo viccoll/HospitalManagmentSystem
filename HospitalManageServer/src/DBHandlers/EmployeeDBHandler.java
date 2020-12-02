@@ -13,7 +13,18 @@ public class EmployeeDBHandler extends DBConfigs implements SQL {
     PreparedStatement prSt;
     @Override
     public ResultSet getAllRecords() {
-        return null;
+
+        resSet = null;
+        select = "SELECT * FROM " + DBConst.EMPLOYEE_TABLE;
+        PreparedStatement prSt = null;
+        try {
+            prSt = DBConnection.getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return resSet;
     }
 
     @Override

@@ -12,6 +12,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource(FXMLConfigs.authorization));
         primaryStage.setTitle("Медицинский центр Vikera");
         primaryStage.setScene(new Scene(root, 900, 700));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

@@ -19,3 +19,21 @@ CREATE TABLE `hospitalsystem`.`appointment` (
     REFERENCES `hospitalsystem`.`outpatientcard` (`idoutpatientcard`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+ALTER TABLE `hospitalsystem`.`appointment`
+DROP FOREIGN KEY `idoutpatientcard`;
+ALTER TABLE `hospitalsystem`.`appointment`
+    ADD COLUMN `idAppType` INT NOT NULL AFTER `idpatient`,
+    CHANGE COLUMN `idoutpatientcard` `idpatient` INT NOT NULL ,
+    ADD INDEX `idoutpatientcard_idx` (`idpatient` ASC) VISIBLE,
+    ADD INDEX `idAppType_idx` (`idAppType` ASC) VISIBLE,
+DROP INDEX `idoutpatientcard_idx` ;
+;
+ALTER TABLE `hospitalsystem`.`appointment`
+    ADD CONSTRAINT `idoutpatientcard`
+    FOREIGN KEY (`idpatient`)
+    REFERENCES `hospitalsystem`.`patient` (`idpatient`),
+    ADD CONSTRAINT `idAppType`
+    FOREIGN KEY (`idAppType`)
+    REFERENCES `hospitalsystem`.`appointmenttype` (`idappointmentType`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;

@@ -40,13 +40,33 @@ public class ServerHandler implements Runnable {
                     if (isEmployeeFound)
                     {
                         respond.writeObject(employee);
+
                         switch (employee.getId()){
                             case 1 :{
                                 RegServerHandler regServerHandler = new RegServerHandler(request,respond);
-                                switch (request.readObject().toString()){
-                                    case "addOutPatientCard": regServerHandler.addOutPatientCard(); break;
-                                }
-                                break;
+                                String action = "";
+                                do {
+                                    action = request.readObject().toString();
+                                    switch (action){
+                                        case "regIssueOutpatientCard": {
+                                             if(request.readObject().toString().equals("updateStreetComboBox"))
+                                             {
+                                                 regServerHandler.updateStreetComboBox();
+                                             }
+                                             String actionDetailed = "";
+                                             do {
+                                                 actionDetailed = request.readObject().toString();
+                                                 switch (actionDetailed){
+                                                     case "addOutPatientCard":  regServerHandler.addOutPatientCard();break;
+                                                     case "clearFields" : break;
+                                                     default:actionDetailed = "exit";
+                                                 }
+                                             }while(!actionDetailed.equals("exit"));
+                                             break;
+                                        }
+                                        case "desktopRegButton": {break;}
+                                    }
+                                }while(!action.equals("returnBack"));
                             }
                             case 2:{
                                 System.out.println("Админ");

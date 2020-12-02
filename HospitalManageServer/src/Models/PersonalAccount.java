@@ -1,6 +1,7 @@
 package Models;
 
 import Configs.DBConst;
+import DBHandlers.EmployeeDBHandler;
 import DBHandlers.PersonalAccountDBHandler;
 
 import java.io.Serializable;
@@ -41,16 +42,16 @@ public class PersonalAccount implements Serializable {
     public void setId(int id) { this.id = id; }
 
     public boolean authorize() {
-        PersonalAccountDBHandler dataHandler = new PersonalAccountDBHandler();
+        EmployeeDBHandler dataHandler = new EmployeeDBHandler();
         ResultSet resultSet = dataHandler.getAllRecords();
         if (resultSet == null) return false;
         else {
             try {
                 while (resultSet.next()) {
-                    if(this.login.equals(resultSet.getString(DBConst.PERSONAL_LOGIN))
-                    && this.password.equals(resultSet.getString(DBConst.PERSONAL_PASSWORD)))
+                    if(this.login.equals(resultSet.getString(DBConst.EMPLOYEE_LOGIN))
+                    && this.password.equals(resultSet.getString(DBConst.EMPLOYEE_PASSWORD)))
                     {
-                      this.id = resultSet.getInt(DBConst.PERSONAL_ACCOUNT_ID);
+                      this.id = resultSet.getInt(DBConst.EMPLOYEE_ID_SPECIALTY);
                       return true;
                     }
                 }

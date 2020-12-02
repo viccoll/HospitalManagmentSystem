@@ -6,16 +6,14 @@ public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1113799434508676095L;
 
-    private OutPatientCard outPatientCard;
     private int id;
     private String surname;
     private String name;
     private String patronymic;
     private String phoneNumber;
     private Address address;
-    private String passportSeries;
-    private int passportNumber;
     private String birthday;
+    private String gender;
 
     public Patient(Patient patient) {
         this.surname = patient.surname;
@@ -23,10 +21,8 @@ public class Patient implements Serializable {
         this.patronymic = patient.patronymic;
         this.phoneNumber = patient.phoneNumber;
         this.address =patient.address;
-        this.passportSeries = patient.passportSeries;
-        this.passportNumber = patient.passportNumber;
         this.birthday = patient.birthday;
-        this.outPatientCard = new OutPatientCard(10);
+        this.gender = patient.gender;
     }
 
     public Patient() {
@@ -41,13 +37,11 @@ public class Patient implements Serializable {
                 '}';
     }
 
-
-    private class OutPatientCard implements Serializable{
-      private int id;
-      private int department;
-
-        private OutPatientCard(int department) {
-            this.department = department;
-        }
-    }
+    public String getSurname() { return surname; }
+    public String getName() { return name; }
+    public String getPatronymic() { return patronymic; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public Address getAddress() { return address; }
+    public String getBirthday() { return birthday; }
+    public String getGender() { return gender; }
 }
