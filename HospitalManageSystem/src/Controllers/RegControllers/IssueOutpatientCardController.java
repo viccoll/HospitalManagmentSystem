@@ -17,8 +17,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class IssueOutpatientCardController {
-    @FXML
-    private Label fullnameRegLabel;
 
     @FXML
     private Button desktopRegButton;
@@ -63,8 +61,8 @@ public class IssueOutpatientCardController {
 
     @FXML
     private ToggleGroup genderGroup;
-
     private final ClientHandler clientHandler = ClientHandler.getClient();
+
     @FXML
     void initialize(){
         updateStreetComboBox();
@@ -111,7 +109,6 @@ public class IssueOutpatientCardController {
         });
 
     }
-
     private void addOutPatientCard() {
         clientHandler.sendMessage("addOutPatientCard");
         String surnamePatient = surnamePatientTextField.getText().trim();
@@ -160,7 +157,6 @@ public class IssueOutpatientCardController {
             else  callAlert("Амбулаторная карта не была заведена. Попробуйте снова.");
         }
     }
-
     private void clearFields() {
         clientHandler.sendMessage("clearFields");
         surnamePatientTextField.setText("");
@@ -172,7 +168,6 @@ public class IssueOutpatientCardController {
         corpusNumberTextField.setText("");
         phoneTextField.setText("");
     }
-
     private void updateStreetComboBox() {
         clientHandler.sendMessage("updateStreetComboBox");
         boolean isUpdateSuccessfully = (boolean) clientHandler.readObject();
@@ -182,7 +177,6 @@ public class IssueOutpatientCardController {
         }
         streetComboBox.setItems(Street.listStreets);
     }
-
     private void callAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);

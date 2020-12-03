@@ -1,6 +1,7 @@
 package Controllers.RegControllers;
 
 import Configs.FXMLConfigs;
+import Models.Employee;
 import ServerHandlers.ClientHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +13,11 @@ import javafx.stage.Stage;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
-
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 public class RegAccountController {
 
-    @FXML
-    private Button desktopRegButton;
     @FXML
     private Button issueAppointmentCardButton;
     @FXML
@@ -31,9 +32,6 @@ public class RegAccountController {
     private Button returnBackButton;
 
     @FXML
-    private ImageView returnBackImage;
-
-    @FXML
     private Label surnameRegLabel;
     @FXML
     private Label nameRegLabel;
@@ -41,13 +39,13 @@ public class RegAccountController {
     private Label patronymicRegLabel;
     @FXML
     private Label birthdayDateRegLabel;
-    @FXML
-    private Label addressRegLabel;
+
 
     private final ClientHandler clientHandler = ClientHandler.getClient();
 
     @FXML
     void initialize() {
+        updateRegAccountData();
         getDoctorScheduleButton.setOnAction(event -> {
             getDoctorScheduleButton.getScene().getWindow().hide();
             clientHandler.sendMessage("regDoctorScedule");
@@ -79,6 +77,17 @@ public class RegAccountController {
             changeScene("../Views/authorization.fxml");
         });
     }
+
+    private void updateRegAccountData()  {
+        surnameRegLabel.setText(Employee.mainEmployee.getSurname());
+        nameRegLabel.setText(Employee.mainEmployee.getName());
+        patronymicRegLabel.setText(Employee.mainEmployee.getPatronymic());
+        int age = Period.between(LocalDate.parse(Employee.mainEmployee.getBirthday(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd")),LocalDate.now() ).getYears();
+        birthdayDateRegLabel.setText(Employee.mainEmployee.getBirthday() +" ("+ age +")");
+
+    }
+
     private void changeScene(String fxmlPath) {
         Parent root = null;
         try {

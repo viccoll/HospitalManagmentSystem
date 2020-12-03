@@ -6,20 +6,25 @@ import javafx.collections.ObservableList;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Street implements Serializable {
+public class Specialty implements Serializable {
+    public static ObservableList<Specialty> listSpecialties =  FXCollections.observableArrayList();
     private static final long serialVersionUID = 1113799434508676095L;
-    public static ObservableList<Street> listStreets =  FXCollections.observableArrayList();
     private int id;
     private String name;
 
-    public static void update(ArrayList<Street> streetArrayList) {
-        listStreets.clear();
-        listStreets.addAll(streetArrayList);
+    public Specialty(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public static void update(ArrayList<Specialty> specialtiesArrayList) {
+        listSpecialties.clear();
+        listSpecialties.addAll(specialtiesArrayList);
     }
 
     @Override
     public String toString() {
-        return  id + ". " + name;
+        return  name;
     }
 
     public int getId() {

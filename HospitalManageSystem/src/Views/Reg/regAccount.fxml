@@ -8,16 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="700" minWidth="900" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.261" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegControllers.RegAccountController">
+<AnchorPane minHeight="700" minWidth="900" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegControllers.RegAccountController">
    <AnchorPane prefHeight="101.0" prefWidth="900.0" style="-fx-background-color: white;">
       <ImageView fitHeight="55.0" fitWidth="63.0" layoutX="54.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../resources/logo.png" />
       </ImageView>
-      <Label fx:id="fullnameRegLabel" layoutX="598.0" layoutY="23.0" prefHeight="38.0" prefWidth="287.0" text="Габриельчик Виктория Сергеевна" textAlignment="CENTER" textFill="#bbbbbb">
-         <font>
-            <Font name="Symbol" size="17.0" />
-         </font>
-      </Label>
       <Label layoutX="118.0" layoutY="32.0" prefHeight="18.0" prefWidth="74.0" text="Vikera" textFill="#bbbbbb">
          <font>
             <Font name="Serif Regular" size="24.0" />
@@ -57,15 +52,10 @@
          <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
-   <ImageView fitHeight="308.0" fitWidth="362.0" layoutX="524.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="389.0" fitWidth="462.0" layoutX="429.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../../resources/regPA.png" />
    </ImageView>
-   <AnchorPane layoutY="652.0" prefHeight="48.0" prefWidth="900.0" style="-fx-background-color: #00c0e14d;">
-      <ImageView fitHeight="38.0" fitWidth="52.0" layoutX="19.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../resources/cancel.png" />
-      </ImageView>
-      <Button fx:id="returnBackButton" layoutX="57.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-image: returnBackImage;" text="Button" />
-   </AnchorPane>
+   <AnchorPane layoutX="194.0" layoutY="652.0" prefHeight="48.0" prefWidth="706.0" style="-fx-background-color: #00c0e14d;" />
    <Label fx:id="surnameRegLabel" layoutX="253.0" layoutY="102.0" prefHeight="32.0" prefWidth="176.0" text="Фамилия" textFill="#000000b3">
       <font>
          <Font size="22.0" />
@@ -81,14 +71,14 @@
          <Font size="22.0" />
       </font>
    </Label>
-   <Label fx:id="birthdayDateRegLabel" layoutX="253.0" layoutY="152.0" prefHeight="20.0" prefWidth="148.0" text="др (кол-во лет)" textFill="#000000a6">
+   <Label fx:id="birthdayDateRegLabel" layoutX="253.0" layoutY="148.0" prefHeight="20.0" prefWidth="148.0" text="др (кол-во лет)" textFill="#000000a6">
       <font>
-         <Font size="14.0" />
+         <Font size="16.0" />
       </font>
    </Label>
-   <Label fx:id="addressRegLabel" layoutX="455.0" layoutY="152.0" prefHeight="18.0" prefWidth="134.0" text="Адрес" textFill="#000000a6">
+   <Button fx:id="returnBackButton" layoutY="652.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="194.0" style="-fx-background-color: #00c0e14d;" text="Выход" textFill="#000000bf">
       <font>
-         <Font size="14.0" />
+         <Font name="Segoe UI Semilight" size="14.0" />
       </font>
-   </Label>
+   </Button>
 </AnchorPane>

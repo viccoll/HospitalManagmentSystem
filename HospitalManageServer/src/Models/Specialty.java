@@ -1,20 +1,17 @@
 package Models;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Street implements Serializable {
+public class Specialty implements Serializable {
+    public static ArrayList<Specialty> listSpecialties = new ArrayList<Specialty>();
     private static final long serialVersionUID = 1113799434508676095L;
-    public static ObservableList<Street> listStreets =  FXCollections.observableArrayList();
     private int id;
     private String name;
 
-    public static void update(ArrayList<Street> streetArrayList) {
-        listStreets.clear();
-        listStreets.addAll(streetArrayList);
+    public Specialty(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @Override

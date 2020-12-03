@@ -1,15 +1,8 @@
 package Controllers;
-
-import Configs.FXMLConfigs;
 import Models.Employee;
-import Models.PersonalAccount;
 import ServerHandlers.ClientHandler;
 import javafx.fxml.FXML;
-
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,10 +17,8 @@ public class AuthorizationController {
 
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private TextField loginField;
-
     @FXML
     private Button authorizationButton;
 
@@ -36,12 +27,11 @@ public class AuthorizationController {
 
         authorizationButton.setOnAction(event -> {
 
-            PersonalAccount personalAccount = new PersonalAccount();
-            personalAccount.setLogin(loginField.getText().trim());
-            personalAccount.setPassword(passwordField.getText().trim());
+            Employee.mainEmployee.setLogin(loginField.getText().trim());
+            Employee.mainEmployee.setPassword(passwordField.getText().trim());
             ClientHandler clientHandler = ClientHandler.getClient();
 
-            clientHandler.sendObject(personalAccount);
+            clientHandler.sendObject(Employee.mainEmployee);
             /*Авторизовался или нет - принимает ответ с сервера*/
             boolean isAuthorize = (boolean)clientHandler.readObject();
 
@@ -49,9 +39,9 @@ public class AuthorizationController {
                     /*Найден ли пользователь с таким персональным аккаунтом*/
                     boolean isEmployeeFound = (boolean)clientHandler.readObject();
                     if(isEmployeeFound){
-                        Employee employee = new Employee((Employee) clientHandler.readObject());
+                        Employee.mainEmployee = new Employee((Employee) clientHandler.readObject());
 
-                        switch (employee.getId()){
+                        switch (Employee.mainEmployee .getId()){
                             case 1 :{
                                 authorizationButton.getScene().getWindow().hide();
                                 changeScene("../Views/Reg/regAccount.fxml");

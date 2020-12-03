@@ -31,4 +31,19 @@ public class SpecialtyDBHandler extends DBConst {
         }
         return null;
     }
+    public ResultSet getAllStreetRecords(){
+
+        ResultSet resSet = null;
+
+        String select = "SELECT * FROM " + DBConst.SPECIALTY_TABLE;
+        PreparedStatement prSt = null;
+        try {
+            prSt = DBConnection.getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        return resSet;
+    }
 }

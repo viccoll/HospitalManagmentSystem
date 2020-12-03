@@ -22,6 +22,7 @@ public class PatientDBHandler implements SQL {
     public ResultSet findRecord(Object object) {
         return null;
     }
+
     public boolean addRecord(Patient patient){
         String insertAddress = "INSERT INTO " + DBConst.ADDRESS_TABLE + "("
                 + DBConst.ADDRESS_ID_STREET + "," + DBConst.ADDRESS_FLAT_NUMBER+ ","

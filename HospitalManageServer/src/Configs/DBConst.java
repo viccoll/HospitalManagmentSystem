@@ -31,6 +31,8 @@ public class DBConst {
     public static final String EMPLOYEE_GENDER = "gender";
     public static final String EMPLOYEE_LOGIN = "login";
     public static final String EMPLOYEE_PASSWORD = "password";
+    public static final String EMPLOYEE_OFFICE = "officenumber";
+    public static final String EMPLOYEE_WORK_TIME= "workTime";
 
 
 

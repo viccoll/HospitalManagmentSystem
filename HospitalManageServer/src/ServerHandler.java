@@ -1,8 +1,5 @@
-import DBHandlers.EmployeeDBHandler;
-import DBHandlers.SpecialtyDBHandler;
-import Models.Address;
 import Models.Employee;
-import Models.PersonalAccount;
+import Models.Specialty;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,7 +24,7 @@ public class ServerHandler implements Runnable {
 
             while (true) {
 
-                PersonalAccount personalAccount = (PersonalAccount) request.readObject();
+                Employee personalAccount = (Employee) request.readObject();
                 boolean isAuthorize = personalAccount.authorize();
                 respond.writeObject(isAuthorize);
 
@@ -65,6 +62,54 @@ public class ServerHandler implements Runnable {
                                              break;
                                         }
                                         case "desktopRegButton": {break;}
+                                        case "regDoctorScedule":{
+                                            if(request.readObject().toString().equals("updateSpecialtiesComboBox"))
+                                            {
+                                                regServerHandler.updateSpecialtiesComboBox("all");
+                                            }
+                                            String actionDetailed = "";
+                                            do {
+                                                actionDetailed = request.readObject().toString();
+                                                switch (actionDetailed){
+                                                    case "getDoctorSchedule": {
+                                                        Specialty specialty = (Specialty) request.readObject();
+                                                        regServerHandler.getDoctorsSchedule(specialty);
+                                                        break;
+                                                    }
+                                                    default:actionDetailed = "exit";
+                                                }
+                                            }while(!actionDetailed.equals("exit"));
+                                            break;
+                                        }
+                                        case "regEditProfile" : {
+                                            String actionDetailed = "";
+                                            do {
+                                                actionDetailed = request.readObject().toString();
+                                                switch (actionDetailed){
+                                                    case "changeLogin": {
+                                                        Employee.mainEmployee = (Employee) request.readObject();
+                                                        Employee employeeLP = (Employee) request.readObject();
+                                                        regServerHandler.changeLogin(employeeLP);
+                                                        break;
+                                                    }
+                                                    case "changePassword":{
+                                                        Employee.mainEmployee = (Employee) request.readObject();
+                                                        Employee employeeLP = (Employee) request.readObject();
+                                                        regServerHandler.changePassword(employeeLP);
+                                                        break;
+                                                    }
+                                                    default:actionDetailed = "exit";
+                                                }
+                                            }while(!actionDetailed.equals("exit"));
+                                            break;
+                                        }
+                                        case "regIssueAppointmentCard": {
+                                            if(request.readObject().toString().equals("updateSpecialtiesComboBox"))
+                                            {
+                                                regServerHandler.updateSpecialtiesComboBox("doctors");
+                                            }
+                                            break;
+                                        }
                                     }
                                 }while(!action.equals("returnBack"));
                             }
