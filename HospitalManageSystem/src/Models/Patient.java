@@ -1,5 +1,8 @@
 package Models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 
 public class Patient implements Serializable {
@@ -12,6 +15,7 @@ public class Patient implements Serializable {
     private Address address;
     private String gender;
     private String birthday;
+    public static ObservableList<Patient> patientsList = FXCollections.observableArrayList();
 
     public Patient() {
     }
@@ -34,5 +38,51 @@ public class Patient implements Serializable {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setGender(String gender) { this.gender = gender; }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
+    }
 }

@@ -1,47 +1,36 @@
-package Controllers.RegControllers;
+package Controllers.CareWorkerControllers;
 
-import Configs.FXMLConfigs;
+import Configs.AlertScene;
 import Models.*;
 import ServerHandlers.ClientHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class IssueAppointmentCardController {
-
+public class IssueAppointmentController {
     @FXML
-    private Button desktopRegButton;
+    private Button desktopCareWorkerButton;
     @FXML
-    private Button issueAppointmentCardButton;
+    private Button getSceduleCareWorkerButton;
     @FXML
-    private Button giveAppointmentCardButton;
+    private Button getPatientsCareWorkerButton;
     @FXML
-    private Button issueOutpatientCardButton;
+    private Button startAppointmentWithoutOrderButton;
     @FXML
-    private Button getDoctorScheduleButton;
-    @FXML
-    private Button editReqProfileButton;
-
-
+    private Button editCareWorkerProfileButton;
     @FXML
     private Button returnBackButton;
+    @FXML
+    private Button issueAppointment;
+
 
     @FXML
-    private ComboBox<Specialty> specialtyComboBox;
-    @FXML
-    private ComboBox<Employee> doctorComboBox;
-
-
+    private Button confirmAppointmentType;
     @FXML
     private TableView<Appointment> AppointmentTable;
     @FXML
@@ -76,27 +65,37 @@ public class IssueAppointmentCardController {
     @FXML
     private TableColumn<Patient, String> patronymicColumn;
 
-
     @FXML
-    private Button confirmAC;
-
+    private ComboBox<Specialty> specialtyComboBox;
     @FXML
-    private Button confirmIssuesButton;
+    private ComboBox<Employee> doctorComboBox;
+
     @FXML
     private Button confirmSpecialty;
-
+    @FXML
+    private Button confirmAC;
+    @FXML
+    private Button findPatientButton;
     @FXML
     private Button confirmDoctor;
     @FXML
-    private Button findPatientButton;
+    private ComboBox<AppointmentType> appointmentTypeComboBox;
 
-    private Employee mainEmployee;
-    private Appointment mainAppointment;
+
+    @FXML
+    private Button confirmIssuesButton;
     private final ClientHandler clientHandler = ClientHandler.getClient();
+
+    private Appointment mainAppointment = new Appointment();
+
+    private Employee mainEmployee = new Employee();
+    private AppointmentType mainAType;
+
+
     @FXML
     void initialize(){
         updateSpecialtiesComboBox();
-
+        updateAppointmentTypeComboBox();
         confirmSpecialty.setOnAction(event -> {
             clientHandler.sendMessage("confirmSpecialty");
             Specialty specialty = specialtyComboBox.getValue();
@@ -106,7 +105,7 @@ public class IssueAppointmentCardController {
             }
             else
             {
-                callAlert("Cпециальность не была выбрана.");
+                AlertScene.callAlert("Cпециальность не была выбрана.");
                 clientHandler.sendObject(true);
             }
         });
@@ -114,83 +113,97 @@ public class IssueAppointmentCardController {
         confirmAC.setOnAction(event -> {
             if( AppointmentTable.getSelectionModel().getSelectedItem() != null){
                 mainAppointment = AppointmentTable.getSelectionModel().getSelectedItem();
-                callAlert("Талон выбран.");
+                AlertScene.callAlert("Талон выбран.");
             }
-            else callAlert("Талон не был выбран.");
+            else AlertScene.callAlert("Талон не был выбран.");
         });
 
         findPatientButton.setOnAction(event -> findPatient());
 
-        confirmIssuesButton.setOnAction(event -> {
-            clientHandler.sendMessage("confirmIssuesButton");
-            if(mainAppointment == null){
-                callAlert("Талон не был выбран.");
-                clientHandler.sendObject(false);
-            }
-            else {
-                clientHandler.sendObject(true);
-                if (patientTable.getSelectionModel().getSelectedItem()!=null)
-                {
-                    clientHandler.sendObject(true);
-                    Patient patient = patientTable.getSelectionModel().getSelectedItem();
-                    mainAppointment.setIdType(1);
-                    clientHandler.sendObject(mainAppointment);
-                    clientHandler.sendObject(patient);
-                    callAlert("Талон успешно оформлен.");
-                    updateAppointmentTable(mainEmployee);
-                }
-                else {
-                    clientHandler.sendObject(false);
-                    callAlert("Пациент не был выбран.");
-                }
-            }
-        });
         confirmDoctor.setOnAction(event -> {
             Employee employee = doctorComboBox.getValue();
             if(employee!=null) {
                 updateAppointmentTable(employee);
             }
-            else callAlert("Доктор не был выбран.");
+            else AlertScene.callAlert("Доктор не был выбран.");
 
         });
 
-        desktopRegButton.setOnAction(event -> {
-            desktopRegButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("desktopRegButton");
-            changeScene(FXMLConfigs.regAccount);
+        confirmAppointmentType.setOnAction(event -> {
+            AppointmentType appointmentType = appointmentTypeComboBox.getValue();
+            if(appointmentType!=null) {
+                mainAppointment.setIdType(appointmentType.getId());
+                AlertScene.callAlert("Тип направления выбран.");
+            }
+            else AlertScene.callAlert("Тип направления не был выбран.");
         });
-        getDoctorScheduleButton.setOnAction(event -> {
-            getDoctorScheduleButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("regDoctorScedule");
-            changeScene(FXMLConfigs.regDoctorScedule);
+
+        confirmIssuesButton.setOnAction(event -> {
+
+            if(mainAppointment == null){
+                AlertScene.callAlert("Талон не был выбран.");
+            }
+            else if(mainAppointment.getIdType()==0)
+          {
+               AlertScene.callAlert("Тип направления не был выбран.");
+            }
+            else {
+                if (patientTable.getSelectionModel().getSelectedItem()!=null)
+                {
+                    clientHandler.sendMessage("confirmIssuesButton");
+                    Patient patient = patientTable.getSelectionModel().getSelectedItem();
+                    clientHandler.sendObject(mainAppointment);
+                    clientHandler.sendObject(patient);
+                    AlertScene.callAlert("Талон успешно оформлен.");
+                    updateAppointmentTable(mainEmployee);
+                }
+                else {
+
+                    AlertScene.callAlert("Пациент не был выбран.");
+                }
+            }
         });
-        editReqProfileButton.setOnAction((event -> {
-            editReqProfileButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("regEditProfile");
-            changeScene(FXMLConfigs.regEditProfile);
-        }));
-        giveAppointmentCardButton.setOnAction(event -> {
-            giveAppointmentCardButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("regGiveAppointmentCard");
-            changeScene(FXMLConfigs.regGiveAppointmentCard);
-        });
-        issueAppointmentCardButton.setOnAction(event -> {
-            issueAppointmentCardButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("regIssueAppointmentCard");
-            changeScene(FXMLConfigs.regIssueAppointmentCard);
-        });
-        issueOutpatientCardButton.setOnAction(event -> {
-            issueOutpatientCardButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("regIssueOutpatientCard");
-            changeScene(FXMLConfigs.regIssueOutpatientCard);
-        });
-        returnBackButton.setOnAction(event -> {
-            returnBackButton.getScene().getWindow().hide();
-            clientHandler.sendMessage("returnBack");
-            changeScene(FXMLConfigs.authorization);
-        });
+
     }
 
+    private void updateAppointmentTypeComboBox() {
+        clientHandler.sendMessage("updateAppointmentTypeComboBox");
+        boolean isUpdateSuccessfully = (boolean) clientHandler.readObject();
+        if(isUpdateSuccessfully) {
+            ArrayList<AppointmentType> typeArrayList = new ArrayList<>();
+            AppointmentType.appointmentTypeList.clear();
+            int size = (int) clientHandler.readObject();
+            for(int i=0; i< size;i++){
+                typeArrayList.add((AppointmentType) clientHandler.readObject());
+            }
+            AppointmentType.appointmentTypeList.addAll(typeArrayList);
+        }
+        appointmentTypeComboBox.setItems(AppointmentType.appointmentTypeList);
+    }
+
+    private void updateSpecialtiesComboBox() {
+        clientHandler.sendMessage("updateSpecialtiesComboBox");
+        boolean isUpdateSuccessfully = (boolean) clientHandler.readObject();
+        if(isUpdateSuccessfully) {
+            ArrayList<Specialty> specialtyArrayList = (ArrayList<Specialty>)clientHandler.readObject();
+            Specialty.update(specialtyArrayList);
+        }
+        specialtyComboBox.setItems(Specialty.listSpecialties);
+    }
+    private void updateDoctorsComboBox(Specialty specialty) {
+        clientHandler.sendMessage("updateDoctorsComboBox");
+        boolean isUpdateSuccessfully = (boolean) clientHandler.readObject();
+        if(isUpdateSuccessfully) {
+            Employee.employeesList.clear();
+            ArrayList<Employee> arrayList = (ArrayList<Employee>)clientHandler.readObject();
+            ArrayList<Employee> newArr = new ArrayList<>();
+            for (Employee employee : arrayList) {
+                if (employee.getIdSpecialty() == specialty.getId()) newArr.add(employee);
+            }
+            Employee.employeesList.addAll(newArr);
+            doctorComboBox.setItems(Employee.employeesList);
+        }
+    }
     private void findPatient() {
         clientHandler.sendMessage("findPatient");
         Patient patient = new Patient();
@@ -202,7 +215,7 @@ public class IssueAppointmentCardController {
                 || patronymicPatient.equals("") || surnamePatient.matches(regex)
                 || namePatient.matches(regex) || patronymicPatient.matches(regex))
         {
-            callAlert("Не все поля введены корректно!");
+            AlertScene.callAlert("Не все поля введены корректно!");
             clientHandler.sendObject(false);
         }
         else {
@@ -226,7 +239,7 @@ public class IssueAppointmentCardController {
                             Patient.patientsList.add(patientS);
                         }
                     }
-                    if(Patient.patientsList.size() == 0) callAlert("Пациент не найден.");
+                    if(Patient.patientsList.size() == 0)  AlertScene.callAlert("Пациент не найден.");
                     patientTable.refresh();
                     surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
                     nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -234,9 +247,9 @@ public class IssueAppointmentCardController {
                     patientTable.setItems(Patient.patientsList);
 
                 }
-                else callAlert("Пациент не найден.");
+                else  AlertScene.callAlert("Пациент не найден.");
             }
-            else callAlert("Данные не найдены. Повторите снова.");
+            else  AlertScene.callAlert("Данные не найдены. Повторите снова.");
         }
     }
 
@@ -260,14 +273,14 @@ public class IssueAppointmentCardController {
                 appointments.add((Appointment) clientHandler.readObject());
             }
             for (Appointment appointment : appointments) {
-               if(appointment.getIdEmployee()==employee.getId())
-               {
-                   if (appointment.isStatus())
-                   {
-                       newArr.add(appointment);
-                       newEmployee.add(employee);
-                   }
-               }
+                if(appointment.getIdEmployee()==employee.getId())
+                {
+                    if (appointment.isStatus() && LocalDate.parse(appointment.getDate()).isAfter(LocalDate.now()))
+                    {
+                        newArr.add(appointment);
+                        newEmployee.add(employee);
+                    }
+                }
             }
             doctorsTable.getItems().removeAll(newEmployee);
             AppointmentTable.getItems().removeAll(newArr);
@@ -282,55 +295,10 @@ public class IssueAppointmentCardController {
             statusColumn.setCellValueFactory(new PropertyValueFactory<>("Status"));
             AppointmentTable.setItems(newArr);
             if(newArr.size() == 0 || newEmployee.size() == 0) {
-                callAlert("Талоны не найдены");
+                AlertScene.callAlert("Талоны не найдены");
             }
             mainEmployee = employee;
         }
-        else callAlert("Данные не найдены. Повторите снова.");
-    }
-
-    private void updateDoctorsComboBox(Specialty specialty) {
-        clientHandler.sendMessage("updateDoctorsComboBox");
-        boolean isUpdateSuccessfully = (boolean) clientHandler.readObject();
-        if(isUpdateSuccessfully) {
-            Employee.employeesList.clear();
-            ArrayList<Employee> arrayList = (ArrayList<Employee>)clientHandler.readObject();
-            ArrayList<Employee> newArr = new ArrayList<>();
-            for (Employee employee : arrayList) {
-                if (employee.getIdSpecialty() == specialty.getId()) newArr.add(employee);
-            }
-            Employee.employeesList.addAll(newArr);
-            doctorComboBox.setItems(Employee.employeesList);
-        }
-    }
-
-    private void callAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText(alertMessage);
-        alert.showAndWait();
-    }
-    private void changeScene(String fxmlPath) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(fxmlPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Stage primaryStage = new Stage();
-        assert root != null;
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
-    private void updateSpecialtiesComboBox() {
-        clientHandler.sendMessage("updateSpecialtiesComboBox");
-        boolean isUpdateSuccessfully = (boolean) clientHandler.readObject();
-        if(isUpdateSuccessfully) {
-            ArrayList<Specialty> specialtyArrayList = (ArrayList<Specialty>)clientHandler.readObject();
-            Specialty.update(specialtyArrayList);
-        }
-        specialtyComboBox.setItems(Specialty.listSpecialties);
+        else AlertScene.callAlert("Данные не найдены. Повторите снова.");
     }
 }

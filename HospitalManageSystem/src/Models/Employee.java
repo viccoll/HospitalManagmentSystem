@@ -35,18 +35,6 @@ public class Employee implements Serializable {
     public Employee() {
 
     }
-    
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "surname='" + surname + '\'' +
-                ", name='" + name + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", gender='" + gender + '\'' +
-                ", id=" + id +
-                ", idSpecialty=" + idSpecialty +
-                '}';
-    }
 
     public String getSurname() { return surname; }
     public String getName() { return name; }
@@ -109,5 +97,10 @@ public class Employee implements Serializable {
     }
     public void setAddress(Models.Address address) {
         Address = address;
+    }
+
+    @Override
+    public String toString() {
+        return   surname + "."+ name.charAt(0)+"."+ patronymic.charAt(0);
     }
 }

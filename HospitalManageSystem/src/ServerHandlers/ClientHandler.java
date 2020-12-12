@@ -11,12 +11,13 @@ public class ClientHandler extends ServerConnectionConfigs {
     private Socket clientSocket;
     private ObjectOutputStream respond;
     private ObjectInputStream request;
+    private String message;
 
     private static ClientHandler client;
 
-    private String message;
 
-    public ClientHandler(){
+
+    private ClientHandler(){
         try {
             clientSocket = new Socket(ServerConnectionConfigs.ipAddress,
                     Integer.parseInt(ServerConnectionConfigs.port));

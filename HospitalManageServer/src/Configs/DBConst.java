@@ -17,7 +17,12 @@ public class DBConst {
     public static final String APPOINTMENT_TIME = "appointmenttime";
     public static final String APPOINTMENT_EPICRISIS = "epicrisis";
     public static final String APPOINTMENT_STATUS = "status";
-    public static final String APPOINTMENT_ID_OUTPATIENT_CARD = "idoutpatientcard";
+    public static final String APPOINTMENT_ID_PATIENT = "idpatient";
+    public static final String APPOINTMENT_APP_TYPE = "idAppType";
+
+    public static final String APPOINTMENT_TYPE_TABLE = "appointmenttype";
+    public static final String APPOINTMENT_TYPE_ID = "idappointmentType";
+    public static final String APPOINTMENT_TYPE_ID_NAME = "name";
 
 
     public static final String EMPLOYEE_TABLE = "employee";

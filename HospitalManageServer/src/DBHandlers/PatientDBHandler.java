@@ -7,21 +7,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PatientDBHandler implements SQL {
-    @Override
+public class PatientDBHandler  {
+
     public ResultSet getAllRecords() {
-     return null;
+        ResultSet resSet = null;
+        String select = "SELECT * FROM " + DBConst.PATIENT_TABLE;
+        System.out.println(select);
+        PreparedStatement prSt = null;
+        try {
+            prSt = DBConnection.getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return resSet;
     }
 
-    @Override
-    public void deleteRecord(Object object) {
-
-    }
-
-    @Override
-    public ResultSet findRecord(Object object) {
-        return null;
-    }
 
     public boolean addRecord(Patient patient){
         String insertAddress = "INSERT INTO " + DBConst.ADDRESS_TABLE + "("
@@ -75,8 +77,38 @@ public class PatientDBHandler implements SQL {
             return false;
         }
     }
-    @Override
-    public void addRecord(Object object) {
 
+
+    public ResultSet findByFullname(Patient patient) {
+       ResultSet resSet = null;
+        String select = "SELECT * FROM " + DBConst.PATIENT_TABLE + " WHERE "
+                + DBConst.PATIENT_SURNAME + " = '" + patient.getSurname()+"' AND "
+                + DBConst.PATIENT_NAME + " = '" + patient.getName()+"' AND "
+                + DBConst.PATIENT_PATRONYMIC + " = '" + patient.getPatronymic()+"'";
+        System.out.println(select);
+        PreparedStatement prSt = null;
+        try {
+            prSt = DBConnection.getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return resSet;
+    }
+    public ResultSet findById(int id) {
+        ResultSet resSet = null;
+        String select = "SELECT * FROM " + DBConst.PATIENT_TABLE + " WHERE "
+                + DBConst.PATIENT_ID+ " = " + id;
+        System.out.println(select);
+        PreparedStatement prSt = null;
+        try {
+            prSt = DBConnection.getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return resSet;
     }
 }

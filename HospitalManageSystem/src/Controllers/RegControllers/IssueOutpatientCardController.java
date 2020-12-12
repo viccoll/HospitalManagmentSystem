@@ -105,7 +105,7 @@ public class IssueOutpatientCardController {
         returnBackButton.setOnAction(event -> {
             returnBackButton.getScene().getWindow().hide();
             clientHandler.sendMessage("returnBack");
-            changeScene("../Views/authorization.fxml");
+            changeScene(FXMLConfigs.authorization);
         });
 
     }

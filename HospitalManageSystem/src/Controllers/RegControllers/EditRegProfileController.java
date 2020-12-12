@@ -80,7 +80,7 @@ public class EditRegProfileController {
         returnBackButton.setOnAction(event -> {
             returnBackButton.getScene().getWindow().hide();
             clientHandler.sendMessage("returnBack");
-            changeScene("../Views/authorization.fxml");
+            changeScene(FXMLConfigs.authorization);
         });
 
         changeLoginButton.setOnAction(event -> {

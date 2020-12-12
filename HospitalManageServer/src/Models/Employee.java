@@ -46,7 +46,14 @@ public class Employee implements Serializable {
                     if(this.login.equals(resultSet.getString(DBConst.EMPLOYEE_LOGIN))
                             && this.password.equals(resultSet.getString(DBConst.EMPLOYEE_PASSWORD)))
                     {
-                        this.id = resultSet.getInt(DBConst.EMPLOYEE_ID_SPECIALTY);
+                        this.id = resultSet.getInt(DBConst.EMPLOYEE_ID);
+                        this.idSpecialty = resultSet.getInt(DBConst.EMPLOYEE_ID_SPECIALTY);
+                        this.login = resultSet.getString(DBConst.EMPLOYEE_LOGIN);
+                        this.password = resultSet.getString(DBConst.EMPLOYEE_PASSWORD);
+                        this.surname = resultSet.getString(DBConst.EMPLOYEE_SURNAME);
+                        this.name = resultSet.getString(DBConst.EMPLOYEE_NAME);
+                        this.patronymic = resultSet.getString(DBConst.EMPLOYEE_PATRONYMIC);
+                        this.birthday = resultSet.getString(DBConst.EMPLOYEE_BIRTHDAY);
                         return true;
                     }
                 }

@@ -2,8 +2,10 @@ package DBHandlers;
 
 import Configs.DBConfigs;
 import Configs.DBConst;
+import Models.Appointment;
 import Models.Employee;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,7 +64,7 @@ public class EmployeeDBHandler extends DBConfigs implements SQL {
     public ResultSet findRecordByLogin(String login) {
         resSet = null;
         select = "SELECT * FROM " + DBConst.EMPLOYEE_TABLE + " WHERE "
-                + DBConst.EMPLOYEE_LOGIN + " = " + login;
+                + DBConst.EMPLOYEE_LOGIN + " = '" + login+"'";
         prSt = null;
         try {
             prSt = DBConnection.getDbConnection().prepareStatement(select);
@@ -98,5 +100,35 @@ public class EmployeeDBHandler extends DBConfigs implements SQL {
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public Employee findRecordByEmployeeId(int id) {
+        resSet = null;
+        select = "SELECT * FROM " + DBConst.EMPLOYEE_TABLE + " WHERE "
+                + DBConst.EMPLOYEE_ID + " = " + id;
+        prSt = null;
+        try {
+            prSt = DBConnection.getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+
+        }
+        if (resSet != null) {
+            try {
+                Employee employee = new Employee();
+                while (resSet.next()) {
+                   employee.setId(resSet.getInt(DBConst.EMPLOYEE_ID));
+                   employee.setSurname(resSet.getString(DBConst.EMPLOYEE_SURNAME));
+                   employee.setName(resSet.getString(DBConst.EMPLOYEE_NAME));
+                   employee.setPatronymic(resSet.getString(DBConst.EMPLOYEE_PATRONYMIC));
+                   employee.setOffice(resSet.getString(DBConst.EMPLOYEE_OFFICE));
+                }
+               return employee;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return null;
     }
 }

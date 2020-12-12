@@ -1,7 +1,7 @@
 package Configs;
 
 public class FXMLConfigs {
-    public final static String authorization = "Views/authorization.fxml";
+    public final static String authorization = "../../Views/authorization.fxml";
 
     public final static String regAccount = "../../Views/Reg/regAccount.fxml";
     public final static String regIssueOutpatientCard = "../../Views/Reg/issueOutpatientCard.fxml";
@@ -17,4 +17,7 @@ public class FXMLConfigs {
     public final static String adminStatistics = "../../Views/Admin/administratorStatistics.fxml";
     public final static String adminEditProfile = "../../Views/Admin/editAdminProfile.fxml";
 
+    public final static String careWorkerAccount = "../../Views/CareWorker/careWorkerAccount.fxml";
+    public final static String careWorkerEditAccount = "../../Views/CareWorker/editCareWorkerAccount.fxml";
+    public final static String careWorkerIssueAppointment = "../../Views/CareWorker/issueAppointment.fxml";
 }

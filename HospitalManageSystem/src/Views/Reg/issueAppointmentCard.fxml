@@ -60,32 +60,30 @@
         <Image url="@../../resources/regPA.png" />
     </ImageView>
     <AnchorPane layoutX="194.0" layoutY="652.0" prefHeight="48.0" prefWidth="706.0" style="-fx-background-color: #00c0e14d;" />
-    <ComboBox fx:id="specialtyComboBox" layoutX="214.0" layoutY="102.0" opacity="0.8" prefHeight="28.0" prefWidth="182.0" promptText="Выберете специальность" style="-fx-background-color: #bbbbbb;" />
-    <ComboBox fx:id="doctorComboBox" layoutX="214.0" layoutY="154.0" opacity="0.8" prefHeight="28.0" prefWidth="182.0" promptText="Выберете врача" style="-fx-background-color: #bbbbbb;" />
-    <TableView fx:id="doctorsTable" layoutX="409.0" layoutY="95.0" prefHeight="200.0" prefWidth="194.0" style="-fx-border-color: #ffffff; -fx-border-width: 0;">
+    <ComboBox fx:id="specialtyComboBox" layoutX="214.0" layoutY="102.0" opacity="0.8" prefHeight="28.0" prefWidth="162.0" promptText="Выберете специальность" style="-fx-background-color: #bbbbbb;" />
+    <ComboBox fx:id="doctorComboBox" layoutX="214.0" layoutY="222.0" opacity="0.8" prefHeight="28.0" prefWidth="162.0" promptText="Выберете врача" style="-fx-background-color: #bbbbbb;" />
+    <TableView fx:id="doctorsTable" focusTraversable="false" layoutX="720.0" layoutY="94.0" prefHeight="200.0" prefWidth="173.0" style="-fx-border-color: #ffffff; -fx-border-width: 0;">
         <columns>
-          <TableColumn fx:id="fullnameColumn" prefWidth="120.80001831054688" style="-fx-background-color: #00c0e14d;" text="ФИО врача" />
-          <TableColumn fx:id="officeNumberColumn" prefWidth="70.4" style="-fx-background-color: #00c0e14d;" text="Кабинет" />
+          <TableColumn fx:id="fullnameColumn" prefWidth="106.4000244140625" style="-fx-background-color: #00c0e14d;" text="Фамилия врача" />
+          <TableColumn fx:id="officeNumberColumn" prefWidth="65.6" style="-fx-background-color: #00c0e14d;" text="Кабинет" />
         </columns>
     </TableView>
-    <TextField fx:id="surnamePatientTextField" layoutX="211.0" layoutY="325.0" promptText=" Фамилия пациента" />
-    <TextField fx:id="namePatientTextField" layoutX="380.0" layoutY="324.0" promptText="Имя пациента" />
-    <TextField fx:id="patronymicPatientTextField" layoutX="212.0" layoutY="366.0" promptText="Отчество пациента" />
-    <TextField fx:id="departmentTextField" layoutX="381.0" layoutY="366.0" promptText="Номер участка" />
-    <TableView fx:id="patientTable" layoutX="208.0" layoutY="424.0" prefHeight="93.0" prefWidth="326.0" style="-fx-border-color: #ffffff;">
+    <TextField fx:id="surnamePatientTextField" layoutX="217.0" layoutY="375.0" promptText=" Фамилия пациента" />
+    <TextField fx:id="namePatientTextField" layoutX="386.0" layoutY="374.0" promptText="Имя пациента" />
+    <TextField fx:id="patronymicPatientTextField" layoutX="217.0" layoutY="433.0" promptText="Отчество пациента" />
+    <TableView fx:id="patientTable" focusTraversable="false" layoutX="209.0" layoutY="484.0" prefHeight="90.0" prefWidth="316.0" style="-fx-border-color: #ffffff;">
         <columns>
-          <TableColumn fx:id="surnameColumn" prefWidth="78.39996337890625" style="-fx-background-color: #00c0e14d;" text="Фамилия" />
-          <TableColumn fx:id="nameColumn" prefWidth="71.199951171875" style="-fx-background-color: #00c0e14d;" text="Имя" />
-          <TableColumn fx:id="patronymicColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: #00c0e14d;" text="Отчество" />
-          <TableColumn fx:id="departmentColumn" prefWidth="72.00009155273438" style="-fx-background-color: #00c0e14d;" text="Участок" />
+          <TableColumn fx:id="surnameColumn" prefWidth="103.20001220703125" style="-fx-background-color: #00c0e14d;" text="Фамилия" />
+          <TableColumn fx:id="nameColumn" prefWidth="89.5999755859375" style="-fx-background-color: #00c0e14d;" text="Имя" />
+          <TableColumn fx:id="patronymicColumn" minWidth="0.0" prefWidth="116.80001831054688" style="-fx-background-color: #00c0e14d;" text="Отчество" />
         </columns>
     </TableView>
-    <Button fx:id="confirmDoctorButton" layoutX="239.0" layoutY="223.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Выбрать" textFill="#000000b2">
+    <Button fx:id="confirmAC" layoutX="633.0" layoutY="314.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Выбрать талон" textFill="#000000b2">
         <font>
           <Font name="Segoe UI Semilight" size="13.0" />
         </font>
     </Button>
-    <Button fx:id="confirmPatientButton" layoutX="239.0" layoutY="541.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Выбрать" textFill="#000000a6">
+    <Button fx:id="confirmIssuesButton" layoutX="245.0" layoutY="586.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffcb97;" text="Оформить" textFill="#000000a6">
         <font>
           <Font name="Segoe UI Semilight" size="13.0" />
         </font>
@@ -95,11 +93,26 @@
          <Font name="Segoe UI Semilight" size="14.0" />
       </font>
    </Button>
-   <TableView fx:id="AppointmentTable" layoutX="601.0" layoutY="95.0" prefHeight="200.0" prefWidth="294.0" style="-fx-border-color: #ffffff; -fx-border-width: 0;">
+   <TableView fx:id="AppointmentTable" focusTraversable="false" layoutX="407.0" layoutY="94.0" prefHeight="200.0" prefWidth="316.0" style="-fx-border-color: #ffffff; -fx-border-width: 0;">
       <columns>
-          <TableColumn fx:id="eventDateColumn" prefWidth="97.5999755859375" style="-fx-background-color: #00c0e14d;" text="Дата приема" />
-          <TableColumn fx:id="eventTimeColumn" minWidth="0.0" prefWidth="107.2000732421875" style="-fx-background-color: #00c0e14d;" text="Время приема" />
-          <TableColumn fx:id="statusColumn" prefWidth="83.19997558593752" style="-fx-background-color: #00c0e14d;" text="Статус" />
+          <TableColumn fx:id="eventDateColumn" prefWidth="107.20004272460938" style="-fx-background-color: #00c0e14d;" text="Дата приема" />
+          <TableColumn fx:id="eventTimeColumn" minWidth="0.0" prefWidth="108.79998779296875" style="-fx-background-color: #00c0e14d;" text="Время приема" />
+          <TableColumn fx:id="statusColumn" prefWidth="100.0" style="-fx-background-color: #00c0e14d;" text="Статус" />
       </columns>
    </TableView>
+   <Button fx:id="confirmSpecialty" layoutX="235.0" layoutY="155.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: #ffd7ab;" text="Подтвердить" textFill="#000000b2">
+      <font>
+         <Font name="Segoe UI Semilight" size="13.0" />
+      </font>
+   </Button>
+   <Button fx:id="confirmDoctor" layoutX="235.0" layoutY="275.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: #ffd7ab;" text="Подтвердить" textFill="#000000b2">
+      <font>
+         <Font name="Segoe UI Semilight" size="13.0" />
+      </font>
+   </Button>
+   <Button fx:id="findPatientButton" layoutX="394.0" layoutY="419.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #ffd7ab;" text="Найти пациента" textFill="#000000a6">
+      <font>
+         <Font name="Segoe UI Semilight" size="13.0" />
+      </font>
+   </Button>
 </AnchorPane>

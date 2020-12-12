@@ -1,5 +1,11 @@
 package Configs;
 
+import DBHandlers.DBConnection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public abstract class DBConfigs {
         protected static final String dbHost = "localhost";
         protected static final String dbPort = "3306";

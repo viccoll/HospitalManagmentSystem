@@ -87,7 +87,7 @@ public class DoctorsSceduleController {
         returnBackButton.setOnAction(event -> {
             returnBackButton.getScene().getWindow().hide();
             clientHandler.sendMessage("returnBack");
-            changeScene("../Views/authorization.fxml");
+            changeScene(FXMLConfigs.authorization);
         });
 
         confirmButton.setOnAction(event -> {
@@ -98,12 +98,17 @@ public class DoctorsSceduleController {
     private void getDoctorSchedule() {
         clientHandler.sendMessage("getDoctorSchedule");
         Specialty specialty = specialtyComboBox.getValue();
-        clientHandler.sendObject(specialty);
 
         boolean isGetDoctorSchedule = (boolean) clientHandler.readObject();
         if(isGetDoctorSchedule){
-            Employee.employeesList.removeAll(Employee.employeesList);
-            Employee.employeesList.addAll((ArrayList<Employee>)clientHandler.readObject());
+            Employee.employeesList.clear();
+            ArrayList<Employee> arrayList = (ArrayList<Employee>)clientHandler.readObject();
+            ArrayList<Employee> finish = new ArrayList<>();
+
+            for (Employee employee : arrayList) {
+                if (employee.getIdSpecialty() == specialty.getId()) finish.add(employee);
+            }
+            Employee.employeesList.addAll(finish);
             surnameColumn.setCellValueFactory(new PropertyValueFactory<>("Surname"));
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
             patronymicColumn.setCellValueFactory(new PropertyValueFactory<>("Patronymic"));

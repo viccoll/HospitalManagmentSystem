@@ -1,16 +1,12 @@
 package Controllers;
+import Configs.AlertScene;
+import Configs.ChangeScene;
 import Models.Employee;
 import ServerHandlers.ClientHandler;
 import javafx.fxml.FXML;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 public class AuthorizationController {
@@ -27,62 +23,40 @@ public class AuthorizationController {
 
         authorizationButton.setOnAction(event -> {
 
-            Employee.mainEmployee.setLogin(loginField.getText().trim());
-            Employee.mainEmployee.setPassword(passwordField.getText().trim());
+            String login = loginField.getText().trim();
+            String password = passwordField.getText().trim();
+
+            Employee.mainEmployee.setLogin(login);
+            Employee.mainEmployee.setPassword(password);
+
             ClientHandler clientHandler = ClientHandler.getClient();
 
-            clientHandler.sendObject(Employee.mainEmployee);
+            clientHandler.sendObject(login);
+            clientHandler.sendObject(password);
             /*Авторизовался или нет - принимает ответ с сервера*/
             boolean isAuthorize = (boolean)clientHandler.readObject();
 
                 if(isAuthorize) {
-                    /*Найден ли пользователь с таким персональным аккаунтом*/
-                    boolean isEmployeeFound = (boolean)clientHandler.readObject();
-                    if(isEmployeeFound){
-                        Employee.mainEmployee = new Employee((Employee) clientHandler.readObject());
-
-                        switch (Employee.mainEmployee .getId()){
+                        Employee.mainEmployee = (Employee) clientHandler.readObject();
+                        switch (Employee.mainEmployee.getIdSpecialty()){
                             case 1 :{
                                 authorizationButton.getScene().getWindow().hide();
-                                changeScene("../Views/Reg/regAccount.fxml");
+                                ChangeScene.change("../Views/Reg/regAccount.fxml",getClass());
                                 break;
                             }
                             case 2:{
                                 authorizationButton.getScene().getWindow().hide();
-                                changeScene("../Views/Admin/administratorAccount.fxml");
+                                ChangeScene.change("../Views/Admin/administratorAccount.fxml",getClass());
                                 break;
                             }
-                            case 3:{
+                            default: {
                                 authorizationButton.getScene().getWindow().hide();
-                                changeScene("../Views/CareWorker/careWorkerAccount.fxml");
+                                ChangeScene.change("../Views/CareWorker/careWorkerAccount.fxml",getClass());
                                 break;
                             }
                         }
                     }
-                    else callAlert("Не удалось определить категорию работника");
-                }
-                else  callAlert("Ошибка авторизации. Проверьте правильность введенных логина и пароля.");
+                    else AlertScene.callAlert("Не удалось авторизоваться");
         });
-    }
-
-    private void callAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText(alertMessage);
-        alert.showAndWait();
-    }
-
-    private void changeScene(String fxmlPath) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(fxmlPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Stage primaryStage = new Stage();
-        assert root != null;
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
     }
 }
